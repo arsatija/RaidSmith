@@ -1,27 +1,28 @@
 {
-  "name": "backend",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/node": "^22.5.5",
-    "@types/simple-oauth2": "^5.0.7",
-    "drizzle-kit": "^0.24.2"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@neondatabase/serverless": "^0.9.5",
-    "axios": "^1.7.7",
-    "drizzle-orm": "^0.33.0",
-    "express": "^4.21.0",
-    "simple-oauth2": "^5.1.0"
-  },
-  "scripts": {
-    "db:push": "drizzle-kit push",
-    "db:studio": "drizzle-kit studio",
-    "db:migrate": "drizzle-kit migrate",
-    "db:generate": "drizzle-kit generate"
-  }
+    "name": "backend",
+    "module": "index.ts",
+    "type": "module",
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/node": "^22.5.5",
+        "@types/simple-oauth2": "^5.0.7",
+        "drizzle-kit": "^0.24.2",
+        "prettier": "^3.3.3"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@neondatabase/serverless": "^0.9.5",
+        "axios": "^1.7.7",
+        "drizzle-orm": "^0.33.0",
+        "express": "^4.21.0",
+        "simple-oauth2": "^5.1.0"
+    },
+    "scripts": {
+        "db:push": "drizzle-kit push",
+        "db:studio": "drizzle-kit studio",
+        "db:migrate": "drizzle-kit migrate",
+        "db:generate": "drizzle-kit generate"
+    }
 }

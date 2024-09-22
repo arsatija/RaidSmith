@@ -1,7 +1,7 @@
-import type { ModuleOptions } from "simple-oauth2";
+import type { ModuleOptions } from 'simple-oauth2';
 
-const clientId = process.env.BLIZZARD_CLIENT_ID ?? "";
-const clientSecret = process.env.BLIZZARD_CLIENT_SECRET ?? "";
+const clientId = process.env.BLIZZARD_CLIENT_ID ?? '';
+const clientSecret = process.env.BLIZZARD_CLIENT_SECRET ?? '';
 
 export const oauthConfig: ModuleOptions = {
     client: {
@@ -9,6 +9,6 @@ export const oauthConfig: ModuleOptions = {
         secret: clientSecret,
     },
     auth: {
-        tokenHost: "https://oauth.battle.net/token",
+        tokenHost: 'https://oauth.battle.net/token',
     },
 };

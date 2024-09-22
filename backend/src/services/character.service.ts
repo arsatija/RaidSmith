@@ -1,8 +1,9 @@
-import axios from "axios";
-import TokenService from "./token.service";
-import db from "../db";
-import { type Character } from "../db/types";
-import { BLIZZARD_CHARACTER_PROFILE_URL } from "../configs/blizzardApis.config";
+import axios from 'axios';
+import TokenService from './token.service';
+import db from '../db';
+import { type Character } from '../db/types';
+import { BLIZZARD_CHARACTER_PROFILE_URL } from '../configs/blizzardApis.config';
+import * as schema from '../db/schemas/schema';
 
 export class CharacterService {
     private tokenService: TokenService;
@@ -24,14 +25,14 @@ export class CharacterService {
                     Authorization: `Bearer ${accessToken}`,
                 },
                 params: {
-                    namespace: "profile-us",
-                    locale: "en_US",
+                    namespace: 'profile-us',
+                    locale: 'en_US',
                 },
             });
 
             console.log(response);
         } catch (error) {
-            console.error("Error fetching character data:", error);
+            console.error('Error fetching character data:', error);
             throw error;
         }
     }
@@ -46,5 +47,7 @@ export class CharacterService {
             level: data.level,
             faction: data.faction.name,
         };
+
+        await db.insert(schema.characters).values(character);
     }
 }

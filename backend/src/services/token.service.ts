@@ -2,8 +2,8 @@ import {
     ClientCredentials,
     type AccessToken,
     type ModuleOptions,
-} from "simple-oauth2";
-import { oauthConfig } from "../configs/oauth.config";
+} from 'simple-oauth2';
+import { oauthConfig } from '../configs/oauth.config';
 
 export default class TokenService {
     private static instance: TokenService;
@@ -33,7 +33,7 @@ export default class TokenService {
             return token.token.access_token as string;
         } catch (error) {
             console.error(`Error acquiring access token: ${error}`);
-            throw new Error("Failed to acquire access token");
+            throw new Error('Failed to acquire access token');
         }
     }
 }
