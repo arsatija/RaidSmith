@@ -3,18 +3,9 @@ import {
     type AccessToken,
     type ModuleOptions,
 } from "simple-oauth2";
+import { oauthConfig } from "../configs/oauth.config";
 
-const client = new ClientCredentials({
-    client: {
-        id: process.env.BLIZZARD_CLIENT_ID ?? "",
-        secret: process.env.BLIZZARD_CLIENT_SECRET ?? "",
-    },
-    auth: {
-        tokenHost: "https://oauth.battle.net/token",
-    },
-});
-
-export class TokenService {
+export default class TokenService {
     private static instance: TokenService;
 
     private client: ClientCredentials;
@@ -24,9 +15,9 @@ export class TokenService {
         this.client = new ClientCredentials(config);
     }
 
-    public static getInstance(config: ModuleOptions): TokenService {
+    public static getInstance(): TokenService {
         if (!TokenService.instance) {
-            TokenService.instance = new TokenService(config);
+            TokenService.instance = new TokenService(oauthConfig);
         }
         return TokenService.instance;
     }
@@ -35,7 +26,7 @@ export class TokenService {
         if (this.cachedToken && !this.cachedToken.expired()) {
             return this.cachedToken.token.access_token as string;
         }
-        
+
         try {
             const token = await this.client.getToken({});
             this.cachedToken = token;

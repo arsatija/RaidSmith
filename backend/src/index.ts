@@ -1,7 +1,5 @@
-import axios from "axios";
-import { TokenService } from "./services/TokenService";
-import { oauthConfig } from "./config/oauthConfig";
+import { CharacterService } from "./services/character.service";
 
-const tokenService = new TokenService(oauthConfig);
+const characterService = new CharacterService();
 
-
+await characterService.fetchCharacter("illidan", "ravravravrav");
