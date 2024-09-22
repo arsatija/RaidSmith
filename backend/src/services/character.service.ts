@@ -38,16 +38,24 @@ export class CharacterService {
     }
 
     public async storeCharacter(data: any) {
-        const character: Character = {
-            character_name: data.name,
-            realm: data.realm.slug,
-            race: data.race.name,
-            class: data.character_class.name,
-            spec: data.active_spec.name,
-            level: data.level,
-            faction: data.faction.name,
-        };
+        try {
+            const character: Character = {
+                character_name: data.name,
+                realm: data.realm.slug,
+                race: data.race.name,
+                class: data.character_class.name,
+                spec: data.active_spec.name,
+                level: data.level,
+                faction: data.faction.name,
+            };
 
-        await db.insert(schema.characters).values(character);
+            await db.insert(schema.characters).values(character);
+        } catch (error) {
+            console.error(
+                'Failed to store character with the following error: ',
+                error
+            );
+            throw error;
+        }
     }
 }
