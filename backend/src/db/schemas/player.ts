@@ -1,10 +1,10 @@
 import { pgTable, serial, uuid, text, timestamp } from 'drizzle-orm/pg-core';
-import { accounts } from './account';
+import { users } from './user';
 
 export const players = pgTable('players', {
     player_id: serial('player_id').primaryKey(),
     name: text('name').notNull(),
-    account_id: uuid('account_id').references(() => accounts.id),
+    account_id: uuid('account_id').references(() => users.id),
     guild_rank: text('guild_rank', {
         enum: ['Guild Master', 'Officer', 'Raider', 'Trial', 'Retired'],
     }).notNull(),
