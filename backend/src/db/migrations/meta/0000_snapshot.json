@@ -1,281 +1,379 @@
 {
-    "id": "0e4e7bb3-0bc9-4140-8021-146f024f5e52",
-    "prevId": "00000000-0000-0000-0000-000000000000",
-    "version": "7",
-    "dialect": "postgresql",
-    "tables": {
-        "public.players": {
-            "name": "players",
-            "schema": "",
-            "columns": {
-                "player_id": {
-                    "name": "player_id",
-                    "type": "serial",
-                    "primaryKey": true,
-                    "notNull": true
-                },
-                "username": {
-                    "name": "username",
-                    "type": "text",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "guild_rank": {
-                    "name": "guild_rank",
-                    "type": "text",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "in_game_role": {
-                    "name": "in_game_role",
-                    "type": "text",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "join_date": {
-                    "name": "join_date",
-                    "type": "timestamp",
-                    "primaryKey": false,
-                    "notNull": false,
-                    "default": "now()"
-                },
-                "leave_date": {
-                    "name": "leave_date",
-                    "type": "timestamp",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "last_active": {
-                    "name": "last_active",
-                    "type": "timestamp",
-                    "primaryKey": false,
-                    "notNull": false
-                }
-            },
-            "indexes": {},
-            "foreignKeys": {},
-            "compositePrimaryKeys": {},
-            "uniqueConstraints": {
-                "players_username_unique": {
-                    "name": "players_username_unique",
-                    "nullsNotDistinct": false,
-                    "columns": ["username"]
-                }
-            }
+  "id": "177b1717-5517-4b43-aa08-57819f289abd",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.players": {
+      "name": "players",
+      "schema": "",
+      "columns": {
+        "player_id": {
+          "name": "player_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
         },
-        "public.characters": {
-            "name": "characters",
-            "schema": "",
-            "columns": {
-                "character_id": {
-                    "name": "character_id",
-                    "type": "serial",
-                    "primaryKey": true,
-                    "notNull": true
-                },
-                "player_id": {
-                    "name": "player_id",
-                    "type": "integer",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "character_name": {
-                    "name": "character_name",
-                    "type": "varchar(13)",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "class": {
-                    "name": "class",
-                    "type": "class",
-                    "typeSchema": "public",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "level": {
-                    "name": "level",
-                    "type": "integer",
-                    "primaryKey": false,
-                    "notNull": false,
-                    "default": 1
-                },
-                "realm": {
-                    "name": "realm",
-                    "type": "varchar(50)",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "race": {
-                    "name": "race",
-                    "type": "race",
-                    "typeSchema": "public",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "faction": {
-                    "name": "faction",
-                    "type": "race",
-                    "typeSchema": "public",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "spec": {
-                    "name": "spec",
-                    "type": "varchar(50)",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "guild": {
-                    "name": "guild",
-                    "type": "varchar(24)",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "last_logged_in": {
-                    "name": "last_logged_in",
-                    "type": "timestamp",
-                    "primaryKey": false,
-                    "notNull": false
-                }
-            },
-            "indexes": {},
-            "foreignKeys": {
-                "characters_player_id_players_player_id_fk": {
-                    "name": "characters_player_id_players_player_id_fk",
-                    "tableFrom": "characters",
-                    "tableTo": "players",
-                    "columnsFrom": ["player_id"],
-                    "columnsTo": ["player_id"],
-                    "onDelete": "cascade",
-                    "onUpdate": "no action"
-                }
-            },
-            "compositePrimaryKeys": {},
-            "uniqueConstraints": {}
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
         },
-        "public.gear": {
-            "name": "gear",
-            "schema": "",
-            "columns": {
-                "gear_id": {
-                    "name": "gear_id",
-                    "type": "serial",
-                    "primaryKey": true,
-                    "notNull": true
-                },
-                "character_id": {
-                    "name": "character_id",
-                    "type": "integer",
-                    "primaryKey": false,
-                    "notNull": true
-                },
-                "trinket1": {
-                    "name": "trinket1",
-                    "type": "varchar(100)",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "trinket2": {
-                    "name": "trinket2",
-                    "type": "varchar(100)",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "weapon": {
-                    "name": "weapon",
-                    "type": "varchar(100)",
-                    "primaryKey": false,
-                    "notNull": false
-                },
-                "tier_2set": {
-                    "name": "tier_2set",
-                    "type": "boolean",
-                    "primaryKey": false,
-                    "notNull": false,
-                    "default": false
-                },
-                "tier_4set": {
-                    "name": "tier_4set",
-                    "type": "boolean",
-                    "primaryKey": false,
-                    "notNull": false,
-                    "default": false
-                }
-            },
-            "indexes": {},
-            "foreignKeys": {
-                "gear_character_id_characters_character_id_fk": {
-                    "name": "gear_character_id_characters_character_id_fk",
-                    "tableFrom": "gear",
-                    "tableTo": "characters",
-                    "columnsFrom": ["character_id"],
-                    "columnsTo": ["character_id"],
-                    "onDelete": "cascade",
-                    "onUpdate": "no action"
-                }
-            },
-            "compositePrimaryKeys": {},
-            "uniqueConstraints": {}
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guild_rank": {
+          "name": "guild_rank",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "in_game_role": {
+          "name": "in_game_role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "join_date": {
+          "name": "join_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        },
+        "leave_date": {
+          "name": "leave_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_active": {
+          "name": "last_active",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
         }
-    },
-    "enums": {
-        "public.class": {
-            "name": "class",
-            "schema": "public",
-            "values": [
-                "Warrior",
-                "Mage",
-                "Rogue",
-                "Priest",
-                "Hunter",
-                "Paladin",
-                "Shaman",
-                "Druid",
-                "Warlock",
-                "Death Knight",
-                "Demon Hunter",
-                "Evoker",
-                "Monk"
-            ]
-        },
-        "public.faction": {
-            "name": "faction",
-            "schema": "public",
-            "values": ["Alliance", "Horde"]
-        },
-        "public.race": {
-            "name": "race",
-            "schema": "public",
-            "values": [
-                "Human",
-                "Orc",
-                "Dwarf",
-                "Night Elf",
-                "Undead",
-                "Tauren",
-                "Gnome",
-                "Troll",
-                "Blood Elf",
-                "Draenei",
-                "Pandaren",
-                "Void Elf",
-                "Nightborne",
-                "Highmountain Tauren",
-                "Zandalari Troll",
-                "Mag''har Orc",
-                "Kul Tiran",
-                "Dark Iron Dwarf",
-                "Vulpera",
-                "Mechanical",
-                "Dracthyr"
-            ]
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "players_user_id_accounts_id_fk": {
+          "name": "players_user_id_accounts_id_fk",
+          "tableFrom": "players",
+          "tableTo": "accounts",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
         }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
     },
-    "schemas": {},
-    "sequences": {},
-    "_meta": {
-        "columns": {},
-        "schemas": {},
-        "tables": {}
+    "public.characters": {
+      "name": "characters",
+      "schema": "",
+      "columns": {
+        "character_id": {
+          "name": "character_id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "player_id": {
+          "name": "player_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "character_name": {
+          "name": "character_name",
+          "type": "varchar(13)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "class": {
+          "name": "class",
+          "type": "class",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "level": {
+          "name": "level",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "default": 1
+        },
+        "realm": {
+          "name": "realm",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "race": {
+          "name": "race",
+          "type": "race",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "faction": {
+          "name": "faction",
+          "type": "faction",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "spec": {
+          "name": "spec",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "guild": {
+          "name": "guild",
+          "type": "varchar(24)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_logged_in": {
+          "name": "last_logged_in",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "characters_player_id_players_player_id_fk": {
+          "name": "characters_player_id_players_player_id_fk",
+          "tableFrom": "characters",
+          "tableTo": "players",
+          "columnsFrom": [
+            "player_id"
+          ],
+          "columnsTo": [
+            "player_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.gear": {
+      "name": "gear",
+      "schema": "",
+      "columns": {
+        "gear_id": {
+          "name": "gear_id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "character_id": {
+          "name": "character_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "trinket1": {
+          "name": "trinket1",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "trinket2": {
+          "name": "trinket2",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "weapon": {
+          "name": "weapon",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tier_2set": {
+          "name": "tier_2set",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        },
+        "tier_4set": {
+          "name": "tier_4set",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false,
+          "default": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "gear_character_id_characters_character_id_fk": {
+          "name": "gear_character_id_characters_character_id_fk",
+          "tableFrom": "gear",
+          "tableTo": "characters",
+          "columnsFrom": [
+            "character_id"
+          ],
+          "columnsTo": [
+            "character_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.accounts": {
+      "name": "accounts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "clerk_user_id": {
+          "name": "clerk_user_id",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "username": {
+          "name": "username",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "registered_date": {
+          "name": "registered_date",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "last_updated": {
+          "name": "last_updated",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "accounts_clerk_user_id_unique": {
+          "name": "accounts_clerk_user_id_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "clerk_user_id"
+          ]
+        },
+        "accounts_username_unique": {
+          "name": "accounts_username_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "username"
+          ]
+        },
+        "accounts_email_unique": {
+          "name": "accounts_email_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "email"
+          ]
+        }
+      }
     }
+  },
+  "enums": {
+    "public.faction": {
+      "name": "faction",
+      "schema": "public",
+      "values": [
+        "Alliance",
+        "Horde"
+      ]
+    },
+    "public.class": {
+      "name": "class",
+      "schema": "public",
+      "values": [
+        "Warrior",
+        "Mage",
+        "Rogue",
+        "Priest",
+        "Hunter",
+        "Paladin",
+        "Shaman",
+        "Druid",
+        "Warlock",
+        "Death Knight",
+        "Demon Hunter",
+        "Evoker",
+        "Monk"
+      ]
+    },
+    "public.race": {
+      "name": "race",
+      "schema": "public",
+      "values": [
+        "Human",
+        "Orc",
+        "Dwarf",
+        "Night Elf",
+        "Undead",
+        "Tauren",
+        "Gnome",
+        "Troll",
+        "Blood Elf",
+        "Draenei",
+        "Pandaren",
+        "Void Elf",
+        "Nightborne",
+        "Highmountain Tauren",
+        "Zandalari Troll",
+        "Mag''har Orc",
+        "Kul Tiran",
+        "Dark Iron Dwarf",
+        "Vulpera",
+        "Mechanical",
+        "Dracthyr"
+      ]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
 }

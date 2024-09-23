@@ -1,12 +1,13 @@
 import {
     pgTable,
-    serial,
+    uuid,
     integer,
     varchar,
     pgEnum,
     timestamp,
 } from 'drizzle-orm/pg-core';
-import { players } from './player';
+import { players } from './schema';
+import { factionEnum } from '../enums/enums';
 
 // Define ENUMs
 export const classEnum = pgEnum('class', [
@@ -47,11 +48,10 @@ export const raceEnum = pgEnum('race', [
     'Mechanical',
     'Dracthyr',
 ]);
-export const factionEnum = pgEnum('faction', ['Alliance', 'Horde']);
 
 export const characters = pgTable('characters', {
-    character_id: serial('character_id').primaryKey(),
-    player_id: integer('player_id').references(() => players.player_id, {
+    character_id: uuid('character_id').defaultRandom().primaryKey(),
+    player_id: uuid('player_id').references(() => players.player_id, {
         onDelete: 'cascade',
     }),
     character_name: varchar('character_name', { length: 13 }).notNull(),
@@ -59,7 +59,7 @@ export const characters = pgTable('characters', {
     level: integer('level').default(1),
     realm: varchar('realm', { length: 50 }).notNull(),
     race: raceEnum('race').notNull(),
-    faction: raceEnum('faction').notNull(),
+    faction: factionEnum('faction').notNull(),
     spec: varchar('spec', { length: 50 }),
     guild: varchar('guild', { length: 24 }),
     last_logged_in: timestamp('last_logged_in'),
