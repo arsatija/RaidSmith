@@ -17,9 +17,9 @@ export class UserService {
 
             await db.insert(schema.users).values(newUser).execute();
 
-            console.log('User profile created succesfully:', newUser);
+            console.log('User profile created successfully:', newUser);
         } catch (error) {
-            console.error('Eror creating user profile:', error);
+            console.error('Error creating user profile:', error);
             throw error;
         }
     }
