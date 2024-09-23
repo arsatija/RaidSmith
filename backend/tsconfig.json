@@ -26,7 +26,6 @@
 
         "forceConsistentCasingInFileNames": true,
         "outDir": "./dist",
-        "rootDir": "./src",
         "types": ["node", "mocha", "chai",]
     },
     "include": ["src/**/*", "tests/**/*"],
