@@ -1,11 +1,4 @@
-import {
-    pgTable,
-    uuid,
-    integer,
-    varchar,
-    pgEnum,
-    timestamp,
-} from 'drizzle-orm/pg-core';
+import { pgTable, integer, varchar, pgEnum, timestamp, serial } from 'drizzle-orm/pg-core';
 import { players } from './schema';
 import { factionEnum } from '../enums/enums';
 
@@ -50,8 +43,8 @@ export const raceEnum = pgEnum('race', [
 ]);
 
 export const characters = pgTable('characters', {
-    character_id: uuid('character_id').defaultRandom().primaryKey(),
-    player_id: uuid('player_id').references(() => players.player_id, {
+    id: integer('character_id').primaryKey(),
+    player_id: serial('player_id').references(() => players.id, {
         onDelete: 'cascade',
     }),
     character_name: varchar('character_name', { length: 13 }).notNull(),

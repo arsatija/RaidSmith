@@ -1,10 +1,10 @@
-import { pgTable, serial, uuid, varchar, boolean } from 'drizzle-orm/pg-core';
+import { pgTable, serial, integer, varchar, boolean } from 'drizzle-orm/pg-core';
 import { characters } from './schema';
 
 export const gear = pgTable('gear', {
-    gear_id: serial('gear_id').primaryKey(),
-    character_id: uuid('character_id')
-        .references(() => characters.character_id, {
+    id: serial('gear_id').primaryKey(),
+    character_id: integer('character_id')
+        .references(() => characters.id, {
             onDelete: 'cascade',
         })
         .notNull(),

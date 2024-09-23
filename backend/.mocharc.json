@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json.schemastore.org/mocharc.json",
+    "require": ["tsx", "dotenv/config", "./test/setup.ts"],
+    "extension": ["ts"],
+    "spec": "./test/**/*.test.ts",
+    "recursive": true,
+    "exit": true,
+    "env" : "dotenv_config_path=.env"
+}

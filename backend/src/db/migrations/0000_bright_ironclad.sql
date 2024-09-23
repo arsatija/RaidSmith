@@ -17,7 +17,7 @@ EXCEPTION
 END $$;
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "players" (
-	"player_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"player_id" serial PRIMARY KEY NOT NULL,
 	"name" text NOT NULL,
 	"user_id" uuid,
 	"guild_rank" text NOT NULL,
@@ -28,8 +28,8 @@ CREATE TABLE IF NOT EXISTS "players" (
 );
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "characters" (
-	"character_id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
-	"player_id" uuid,
+	"character_id" integer PRIMARY KEY NOT NULL,
+	"player_id" serial NOT NULL,
 	"character_name" varchar(13) NOT NULL,
 	"class" "class" NOT NULL,
 	"level" integer DEFAULT 1,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "characters" (
 --> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "gear" (
 	"gear_id" serial PRIMARY KEY NOT NULL,
-	"character_id" uuid NOT NULL,
+	"character_id" integer NOT NULL,
 	"trinket1" varchar(100),
 	"trinket2" varchar(100),
 	"weapon" varchar(100),

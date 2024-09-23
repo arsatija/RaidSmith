@@ -1,8 +1,8 @@
-import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text, timestamp, serial } from 'drizzle-orm/pg-core';
 import { users } from './schema';
 
 export const players = pgTable('players', {
-    player_id: uuid('player_id').defaultRandom().primaryKey(),
+    id: serial('player_id').primaryKey(),
     name: text('name').notNull(),
     user_id: uuid('user_id').references(() => users.id),
     guild_rank: text('guild_rank', {
