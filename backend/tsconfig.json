@@ -11,6 +11,8 @@
         // "allowImportingTsExtensions": false,
         "esModuleInterop": true,
         // "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
 
         // Best practices
         "strict": true,
@@ -25,11 +27,11 @@
         "forceConsistentCasingInFileNames": true,
         "outDir": "./dist",
         "types": ["node", "mocha", "chai",],
-        "paths": {
-            "#/*": [
-                "./src/*"
-            ]
-        }
+        // "paths": {
+        //     "#/*": [
+        //         "./src/*"
+        //     ]
+        // }
     },
     "include": ["src/**/*.ts", "test/**/*.ts"],
     "exclude": ["node_modules", "dist"]

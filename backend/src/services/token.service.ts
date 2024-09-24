@@ -1,25 +1,11 @@
-import {
-    ClientCredentials,
-    type AccessToken,
-    type ModuleOptions,
-} from 'simple-oauth2';
-import { oauthConfig } from '../configs/oauth.config';
+import { ClientCredentials, type AccessToken, type ModuleOptions } from 'simple-oauth2';
 
-export default class TokenService {
-    private static instance: TokenService;
-
+export class TokenService {
     private client: ClientCredentials;
     private cachedToken: AccessToken | null = null;
 
     constructor(config: ModuleOptions) {
         this.client = new ClientCredentials(config);
-    }
-
-    public static getInstance(): TokenService {
-        if (!TokenService.instance) {
-            TokenService.instance = new TokenService(oauthConfig);
-        }
-        return TokenService.instance;
     }
 
     public async getAccessToken(): Promise<string> {

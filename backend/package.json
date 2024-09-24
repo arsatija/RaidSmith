@@ -18,7 +18,8 @@
     "run-script-os": "^1.1.6",
     "sinon": "^19.0.2",
     "ts-node": "^10.9.2",
-    "tsx": "^4.19.1"
+    "tsx": "^4.19.1",
+    "vitest": "^2.1.1"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

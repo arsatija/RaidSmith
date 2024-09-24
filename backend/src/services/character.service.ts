@@ -1,5 +1,5 @@
 import axios from 'axios';
-import TokenService from './token.service';
+import { TokenService } from './token.service';
 import db from '../db';
 import { type Character } from '../db/types';
 import { BLIZZARD_CHARACTER_PROFILE_URL } from '../configs/blizzardApis.config';
@@ -7,11 +7,8 @@ import * as schema from '../db/schemas/schema';
 import { and, eq } from 'drizzle-orm';
 
 export class CharacterService {
-    private tokenService: TokenService;
 
-    constructor() {
-        this.tokenService = TokenService.getInstance();
-    }
+    constructor(private tokenService: TokenService) {}
 
     public async fetchCharacter(realm: string, characterName: string): Promise<any> {
         try {

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { CharacterService } from '../../src/services/character.service';
+import { characterService } from '../../src/services';
 import db from '../../src/db';
 import * as schema from '../../src/db/schemas/schema';
 import { eq } from 'drizzle-orm';
@@ -22,15 +22,11 @@ const mockPlayer: Player = {
 };
 
 describe('CharacterService', () => {
-    let characterService: CharacterService;
-
     before(async () => {
         // Deleteing in order to ensure no foreign key constraint issues. too lazy to write clever code for it atm
         await db.delete(schema.characters);
         await db.delete(schema.players);
         await db.delete(schema.users);
-
-        characterService = new CharacterService();
     });
 
     it('should fetch a character from the realm Illidan named Ravxd and store it in the db', async () => {
