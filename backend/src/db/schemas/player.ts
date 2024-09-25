@@ -5,13 +5,9 @@ export const players = pgTable('players', {
     id: serial('player_id').primaryKey(),
     name: text('name').notNull(),
     user_id: uuid('user_id').references(() => users.id),
-    guild_rank: text('guild_rank', {
-        enum: ['Guild Master', 'Officer', 'Raider', 'Trial', 'Retired'],
-    }).notNull(),
+    guild_rank: text('guild_rank').notNull(),
     guild_id: integer('guild_id').references(() => guilds.id),
-    in_game_role: text('in_game_role', {
-        enum: ['Tank', 'Healer', 'DPS'],
-    }).notNull(),
+    in_game_role: text('in_game_role').notNull(),
     join_date: timestamp('join_date').defaultNow(),
     leave_date: timestamp('leave_date'),
     last_active: timestamp('last_active'),
