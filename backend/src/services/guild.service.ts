@@ -40,7 +40,7 @@ export class GuildService {
         return insertedGuild[0] as Guild;
     }
 
-    public async createGuild(realm: string, name: string) {
+    public async createGuild(realm: string, name: string): Promise<Guild> {
         const response = await this.fetchGuild(realm, name);
 
         const insertedGuild = await this.storeGuild(response);

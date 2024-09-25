@@ -28,6 +28,7 @@ export class PlayerService {
             };
 
             const player = await this.storePlayer(newPlayer);
+            return player;
         } catch (error) {
             logger.error('Failed to create player with the following error', error);
             throw error;
