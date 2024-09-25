@@ -6,7 +6,7 @@ import TripleBeam from 'triple-beam';
 
 const defaultStrip = [TripleBeam.LEVEL, TripleBeam.MESSAGE, TripleBeam.SPLAT];
 
-const myFormat = winston.format.printf(({ level, message, timestamp, stack, ms, ...meta }) => {
+const myFormat = winston.format.printf(({ level, message, timestamp, ms, error, ...meta }) => {
     const levelColors: Record<string, (text: string) => string> = {
         silly: chalk.magenta.bold,
         debug: chalk.blue,
@@ -25,8 +25,8 @@ const myFormat = winston.format.printf(({ level, message, timestamp, stack, ms, 
     let log = `${chalk.gray(timestamp)} ${coloredLevel} - ${coloredMessage} ${chalk.grey.italic(ms)}`;
 
     // If there's a stack trace, add it
-    if (stack) {
-        log += `\n${chalk.red(stack)}`;
+    if (error) {
+        log += `\n${chalk.red(error.stack)}`;
     }
 
     // Format and colorize metadata (such as objects)

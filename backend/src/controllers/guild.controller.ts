@@ -9,11 +9,8 @@ export default class GuildController {
         try {
             const guild = await guildService.createGuild(req.body.realm, req.body.name);
             return res.json(guild);
-        } catch (error) {
-            if (error instanceof Error) {
-                error.message = `Failed to create guild ${req.body.name}-${req.body.realm}.`;
-            }
-            logger.error(error);
+        } catch (error) { 
+            logger.error(`Failed to create guild ${req.body.name}-${req.body.realm}.`, {error: error});
             return res.sendStatus(500);
         }
     }
