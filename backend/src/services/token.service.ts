@@ -1,4 +1,5 @@
 import { ClientCredentials, type AccessToken, type ModuleOptions } from 'simple-oauth2';
+import logger from '../utils/logger';
 
 export class TokenService {
     private client: ClientCredentials;
@@ -16,9 +17,10 @@ export class TokenService {
         try {
             const token = await this.client.getToken({});
             this.cachedToken = token;
+            logger.verbose('Acquired access_token for Battle.net API.');
             return token.token.access_token as string;
         } catch (error) {
-            console.error(`Error acquiring access token: ${error}`);
+            logger.error(`Error acquiring access token: ${error}`);
             throw new Error('Failed to acquire access token');
         }
     }

@@ -3,6 +3,7 @@ import path from 'path';
 import chalk from 'chalk';
 import util from 'util';
 import TripleBeam from 'triple-beam';
+import { LOG_LEVEL } from '../configs/logger.config';
 
 const defaultStrip = [TripleBeam.LEVEL, TripleBeam.MESSAGE, TripleBeam.SPLAT];
 
@@ -14,6 +15,7 @@ const myFormat = winston.format.printf(({ level, message, timestamp, ms, error, 
         info: chalk.green,
         warn: chalk.yellow,
         error: chalk.red.bold,
+        http: chalk.magenta,
     };
 
     // Colorize the log level using chalk
@@ -45,7 +47,7 @@ const myFormat = winston.format.printf(({ level, message, timestamp, ms, error, 
 
 // Create Winston logger instance
 const logger = winston.createLogger({
-    level: 'info',
+    level: LOG_LEVEL,
     format: winston.format.combine(
         winston.format.timestamp({
             format: 'YYYY-MM-DD HH:mm:ss',

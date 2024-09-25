@@ -1,12 +1,18 @@
 import express from 'express';
 import routes from './routes';
 import morgan from 'morgan';
+import logger from './utils/logger';
 
 const app = express();
+const morganMiddleware = morgan(':remote-addr :method :url :status :res[content-length] - :response-time ms', {
+    stream: {
+        write: (message) => logger.http(message),
+    },
+});
 
 // Middleware
 app.use(express.json());
-app.use(morgan('tiny'));
+app.use(morganMiddleware);
 
 // Routes
 app.use('/api', routes);
@@ -18,7 +24,7 @@ app.use((err: any, req: any, res: any, next: any) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    logger.info(`Server running on port ${PORT}`);
 });
 
 export default app;
